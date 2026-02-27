@@ -1,0 +1,5 @@
+{
+  "name": "Data Pipeline Architect Game",
+  "description": "An interactive drag-and-drop game to learn the components of a modern data pipeline.",
+  "requestFramePermissions": []
+}
