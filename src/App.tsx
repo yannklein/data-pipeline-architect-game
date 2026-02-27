@@ -401,35 +401,57 @@ export default function App() {
               </div>
               
               <div className="bg-slate-100/50 rounded-[32px] p-8 border border-slate-200/50">
-                <div className="flex flex-wrap justify-center gap-4 min-h-[80px]">
-                  <AnimatePresence mode="popLayout">
-                    {availableItems.map((item) => (
-                      <motion.div
-                        key={item.id}
-                        layout
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        exit={{ opacity: 0, scale: 0.5 }}
-                      >
-                        <Draggable item={item} onSelect={setLastPlacedItem} />
-                      </motion.div>
-                    ))}
-                  </AnimatePresence>
-                </div>
-
-                {availableItems.length === 0 && !isGameComplete && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    className="mt-10 flex justify-center"
+                {isGameComplete ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="flex flex-col items-center text-center py-4"
                   >
-                    <button 
-                      onClick={checkAnswers}
-                      className="bg-brand text-white px-10 py-4 rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-brand-dark transition-all shadow-lg shadow-brand/20 hover:shadow-xl active:scale-95"
+                    <div className="inline-flex p-3 rounded-2xl bg-emerald-50 text-emerald-600 mb-4">
+                      <CheckCircle2 size={32} />
+                    </div>
+                    <h3 className="text-2xl font-black text-[#1D1D1D] mb-2">Architecture Verified</h3>
+                    <p className="text-slate-500 mb-8 font-medium text-sm">Your data pipeline design follows industry best practices.</p>
+                    <button
+                      onClick={resetGame}
+                      className="flex items-center gap-2 mx-auto bg-[#1D1D1D] text-white px-8 py-3 rounded-xl font-bold hover:bg-black transition-all active:scale-95"
                     >
-                      Validate Architecture
+                      <RefreshCcw size={18} /> New Design
                     </button>
                   </motion.div>
+                ) : (
+                  <>
+                    <div className="flex flex-wrap justify-center gap-4 min-h-[80px]">
+                      <AnimatePresence mode="popLayout">
+                        {availableItems.map((item) => (
+                          <motion.div
+                            key={item.id}
+                            layout
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                          >
+                            <Draggable item={item} onSelect={setLastPlacedItem} />
+                          </motion.div>
+                        ))}
+                      </AnimatePresence>
+                    </div>
+
+                    {availableItems.length === 0 && (
+                      <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        className="mt-10 flex justify-center"
+                      >
+                        <button
+                          onClick={checkAnswers}
+                          className="bg-brand text-white px-10 py-4 rounded-2xl font-bold text-sm uppercase tracking-widest hover:bg-brand-dark transition-all shadow-lg shadow-brand/20 hover:shadow-xl active:scale-95"
+                        >
+                          Validate Architecture
+                        </button>
+                      </motion.div>
+                    )}
+                  </>
                 )}
               </div>
             </div>
@@ -657,27 +679,7 @@ export default function App() {
             </div>
           </div>
 
-          {isGameComplete && (
-            <motion.div 
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              className="p-8 bg-white rounded-3xl text-center border border-emerald-100 shadow-xl shadow-emerald-100/50"
-            >
-              <div className="inline-flex p-3 rounded-2xl bg-emerald-50 text-emerald-600 mb-4">
-                <CheckCircle2 size={32} />
-              </div>
-              <h3 className="text-2xl font-black text-[#1D1D1D] mb-2">Architecture Verified</h3>
-              <p className="text-slate-500 mb-8 font-medium text-sm">Your data pipeline design follows industry best practices.</p>
-              <button 
-                onClick={resetGame}
-                className="flex items-center gap-2 mx-auto bg-[#1D1D1D] text-white px-8 py-3 rounded-xl font-bold hover:bg-black transition-all active:scale-95"
-              >
-                <RefreshCcw size={18} /> New Design
-              </button>
-            </motion.div>
-          )}
-
-          {checked && !isGameComplete && (
+{checked && !isGameComplete && (
             <motion.div 
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
