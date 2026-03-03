@@ -17,6 +17,7 @@ import {
   BarChart3, 
   ShieldCheck,
   ArrowRight,
+  ArrowDown,
   Plus,
   Target,
   BookOpen
@@ -497,10 +498,10 @@ export default function App() {
               {/* Column 2: Processing & Storage */}
               <div className="space-y-8 relative">
                 {/* Connector Arrows (Desktop) */}
-                <div className="hidden md:block absolute -left-12 top-1/2 -translate-y-1/2 text-slate-300">
+                <div className="hidden md:block absolute -left-12 top-11 text-slate-300">
                   <ArrowRight size={24} />
                 </div>
-                <div className="hidden md:block absolute -right-12 top-1/2 -translate-y-1/2 text-slate-300">
+                <div className="hidden md:block absolute -right-12 top-11 text-slate-300">
                   <ArrowRight size={24} />
                 </div>
 
@@ -514,13 +515,12 @@ export default function App() {
                     isWrong={checked && placedItems[2]?.correctSlot !== 2}
                   />
                   
-                  <div className="relative py-4">
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="w-px h-full bg-slate-200" />
-                    </div>
-                    <div className="relative z-10 flex justify-center">
-                      <div className="bg-white px-3 py-1 rounded-full border border-slate-200 text-[10px] font-bold text-slate-400 uppercase tracking-widest">Flow</div>
-                    </div>
+                  <div className="flex flex-col items-center gap-1 py-2">
+                    <ArrowDown size={16} className="text-slate-300" />
+                    <Tooltip text="Raw data is ingested from sources and loaded into centralized storage, where it becomes available for transformation and analysis.">
+                      <div className="bg-white px-3 py-1 rounded-full border border-slate-200 text-[10px] font-bold text-slate-400 uppercase tracking-widest cursor-help">Ingest → Store</div>
+                    </Tooltip>
+                    <ArrowDown size={16} className="text-slate-300" />
                   </div>
 
                   <Slot 
@@ -550,7 +550,7 @@ export default function App() {
                   </div>
 
                   <div className="flex flex-col items-center gap-2">
-                    <div className="text-slate-300">↕</div>
+                    <ArrowDown size={16} className="text-slate-300" />
                     <Slot 
                       id={4} 
                       label="Compute Engine"
